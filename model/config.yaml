@@ -1,0 +1,53 @@
+
+# +-----------+---------------------------+------------------------------------+
+# | Parameter | Meaning                   | Description                        |
+# +-----------+---------------------------+------------------------------------+
+# | theta     | Rotation around z(i-1)    | Joint angle around previous z-axis |
+# | d         | Translation along z(i-1)  | Offset along previous z-axis       |
+# | a         | Link length along x(i)     | Distance along current x-axis     |
+# | alpha     | Twist angle around x(i)    | Rotation around current x-axis    |
+# +-----------+---------------------------+------------------------------------+
+model:
+  name: "Manipulator_3DOF"
+  links:
+    - id: 1
+      theta:
+        value: 0.0
+        variable: true     # zmienny (np. przegub obrotowy)
+      d:
+        value: 0.0
+        variable: false
+      a:
+        value: 1.0
+        variable: false
+      alpha:
+        value: 0.0
+        variable: false
+
+    - id: 2
+      theta:
+        value: 0.0
+        variable: true
+      d:
+        value: 0.0
+        variable: false
+      a:
+        value: 0.6
+        variable: false
+      alpha:
+        value: 0.0
+        variable: false
+
+    - id: 3
+      theta:
+        value: 0.0
+        variable: true
+      d:
+        value: 0.0
+        variable: false
+      a:
+        value: 0.2
+        variable: false
+      alpha:
+        value: 0.0
+        variable: false
