@@ -1,0 +1,9 @@
+
+add_library(kinematic STATIC src/kinematic.cpp)
+
+target_include_directories(kinematic
+ PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc
+ 
+)
+
+target_link_libraries(kinematic PUBLIC link yaml-cpp Eigen3::Eigen)

@@ -1,0 +1,8 @@
+add_library(link STATIC src/link.cpp)
+find_package(Eigen3 REQUIRED)
+
+target_include_directories(link PUBLIC 
+${CMAKE_CURRENT_SOURCE_DIR}/inc
+ )
+
+target_link_libraries(link PUBLIC Eigen3::Eigen)

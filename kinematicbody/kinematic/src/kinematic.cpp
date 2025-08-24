@@ -1,39 +1,6 @@
-#include <yaml-cpp/yaml.h>
 #include "kinematic.h"
-#include <string>
-#include <iostream>
 
- /*
-class Link
-{
-    private:
-    int id ;
-    double* theta_ptr ;
-    double* d_ptr ;
-    double* a_ptr ;
-    double* alfa_ptr ;
-    public:
-    Link(int id , double* theta , double* d , double* a , double* alfa) : id(id) , theta_ptr(theta) , d_ptr(d) , a_ptr(a) , alfa_ptr(alfa)
-    {
-        std::cout << "link "<<id << " created" <<'\n' ;
-    }
-
-};
-
-
-class KinematicBody
-{
-    private:
-    std::string configPath;
-    YAML::Node config ;
-    YAML::Node model ;
-
-    //array of links
-    std::vector<Link> allParam;
-    std::vector<double> jointVarList ;
-
-    public:
-    KinematicBody(const std::string path) : configPath(path)
+KinematicBody::KinematicBody(const std::string path) : configPath(path)
     {
         try
         {
@@ -118,12 +85,3 @@ class KinematicBody
 
         }
     }
-};
-
-*/
-
-int main() 
-{
-    KinematicBody model1("../data/config.yaml");
-    return 0;
-}
