@@ -2,7 +2,7 @@
 #include "kinematic.h"
 #include <string>
 #include <iostream>
-
+#include <Eigen/Dense>
  /*
 class Link
 {
@@ -125,5 +125,7 @@ class KinematicBody
 int main() 
 {
     KinematicBody model1("../data/config.yaml");
+    Eigen::Vector4d endEffector = model1.forwardKinematic();
+    std::cout << "end efector position" << '\n' <<  endEffector.transpose() << std::endl;
     return 0;
 }

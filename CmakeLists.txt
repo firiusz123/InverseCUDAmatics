@@ -18,7 +18,8 @@ target_link_libraries(Inversecudamatics
     PRIVATE
         yaml-cpp
         Eigen3::Eigen
-        kinematic
         link
+        kinematic
+        
         
 )

@@ -84,4 +84,16 @@ KinematicBody::KinematicBody(const std::string path) : configPath(path)
             allParam.emplace_back(id, theta_ptr, d_ptr, a_ptr, alfa_ptr);
 
         }
+}
+Eigen::Vector4d KinematicBody::forwardKinematic()
+{
+    Eigen::Vector4d point_local(0, 0, 0, 1);
+    Eigen::Matrix4d transform = Eigen::Matrix4d::Identity();
+    for (size_t i = 0 ; i < (allParam.size()); i++)
+    {
+        transform = transform * allParam[i].getDHTransform();
+        allParam[i].setEndLinkCord(transform * point_local);
     }
+    
+    return transform * point_local ;
+}

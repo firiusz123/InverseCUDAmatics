@@ -3,6 +3,7 @@
 #include <string>
 #include <yaml-cpp/yaml.h>
 #include "link.h"
+#include <Eigen/Dense>
 
 class KinematicBody
 {
@@ -17,4 +18,7 @@ class KinematicBody
 
     public:
     KinematicBody(const std::string path);
+    Eigen::Vector4d forwardKinematic();
+    
+    
 };

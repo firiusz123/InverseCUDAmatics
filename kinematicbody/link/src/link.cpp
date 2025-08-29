@@ -38,13 +38,9 @@ void Link::valueSet(int new_id,
     this->alfa_ptr =new_alfa;
 }
 /******************************************************************************************************************************************** */
-Eigen::Matrix4d Link::operator*(const Link& other) const
+Eigen::Matrix4d Link::operator*( const Link& link) const
 {
-    Eigen::Matrix4d A ;
-    //A << std::cos(this->theta_ptr) << - std::sin(this->theta_ptr) << 0 << thisa_ptr;
-    A << std::cos(*this->theta_ptr);
-    Eigen::Matrix4d B ;
     
-    return A;
+    return link.dhTransform ;
 }
 /******************************************************************************************************************************************** */
