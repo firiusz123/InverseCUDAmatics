@@ -10,10 +10,10 @@ class KinematicBody
     std::string configPath;
     YAML::Node config ;
     YAML::Node model ;
-
+/********************************************************* */
     //array of links
     std::vector<Link> allParam;
-    std::vector<double> jointVarList ;
+    std::vector<float> jointVarList ;
 
     public:
     KinematicBody(const std::string path);

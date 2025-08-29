@@ -23,9 +23,9 @@ KinematicBody::KinematicBody(const std::string path) : configPath(path)
 
 
             //theta 
-            double theta = yamlLink["theta"]["value"].as<double>();
+            float theta = yamlLink["theta"]["value"].as<float>();
             bool theta_var = yamlLink["theta"]["variable"].as<bool>() ? true : false;
-            double* theta_ptr ;
+            float* theta_ptr ;
 
             if(theta_var)
             {
@@ -34,14 +34,14 @@ KinematicBody::KinematicBody(const std::string path) : configPath(path)
             }
             else
             {   
-                theta_ptr = new double(theta);
+                theta_ptr = new float(theta);
             }
 
 
             //d 
-            double d = yamlLink["d"]["value"].as<double>();
+            float d = yamlLink["d"]["value"].as<float>();
             bool d_var = yamlLink["d"]["variable"].as<bool>();
-            double* d_ptr;
+            float* d_ptr;
             if(d_var)
             {
                 jointVarList.push_back(d);
@@ -49,13 +49,13 @@ KinematicBody::KinematicBody(const std::string path) : configPath(path)
             }
             else
             {
-                d_ptr = new double(d);
+                d_ptr = new float(d);
             }
 
             //a
-            double a = yamlLink["a"]["value"].as<double>();
+            float a = yamlLink["a"]["value"].as<float>();
             bool a_var = yamlLink["a"]["variable"].as<bool>();
-            double* a_ptr ;
+            float* a_ptr ;
             if(a_var)
             {
                 jointVarList.push_back(a);
@@ -63,13 +63,13 @@ KinematicBody::KinematicBody(const std::string path) : configPath(path)
             }
             else
             {
-                a_ptr = new double(a);
+                a_ptr = new float(a);
             }
             
             //alfa
-            double alfa = yamlLink["a"]["value"].as<double>();
+            float alfa = yamlLink["a"]["value"].as<float>();
             bool alfa_var = yamlLink["a"]["variable"].as<bool>();
-            double* alfa_ptr ;
+            float* alfa_ptr ;
             if(alfa_var)
             {
                 jointVarList.push_back(alfa);
@@ -77,7 +77,7 @@ KinematicBody::KinematicBody(const std::string path) : configPath(path)
             }
             else
             {
-                alfa_ptr = new double(alfa);
+                alfa_ptr = new float(alfa);
             }
 
             

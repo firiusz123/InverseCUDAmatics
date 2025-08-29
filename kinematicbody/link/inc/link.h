@@ -5,13 +5,15 @@ class Link
 {
     private:
     int id ;
-    double* theta_ptr ;
-    double* d_ptr ;
-    double* a_ptr ;
-    double* alfa_ptr ;
+    float* theta_ptr ;
+    float* d_ptr ;
+    float* a_ptr ;
+    float* alfa_ptr ;
+    Eigen::Matrix4d dhTransform;
+ /************************************************************************************** */
     public:
-    Link(int id , double* theta , double* d , double* a , double* alfa);
-    void valueSet(int id , double* theta , double* d , double* a , double* alfa);
+    Link(int id , float* theta , float* d , float* a , float* alfa);
+    void valueSet(int id , float* theta , float* d , float* a , float* alfa);
     Eigen::Matrix4d operator*(const Link& other) const;
 
 };
