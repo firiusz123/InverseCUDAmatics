@@ -6,4 +6,4 @@ target_include_directories(kinematic
  
 )
 
-target_link_libraries(kinematic PUBLIC link yaml-cpp Eigen3::Eigen)
+target_link_libraries(kinematic PUBLIC robotmodel yaml-cpp Eigen3::Eigen)

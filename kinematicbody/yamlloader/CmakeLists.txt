@@ -1,0 +1,5 @@
+add_library(yamlloader STATIC src/yamlloader.cpp)
+target_include_directories(yamlloader 
+PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc )
+
+target_link_libraries(yamlloader PUBLIC robotmodel yaml-cpp)

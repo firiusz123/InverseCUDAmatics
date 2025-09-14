@@ -18,8 +18,9 @@ target_link_libraries(Inversecudamatics
     PRIVATE
         yaml-cpp
         Eigen3::Eigen
-        link
+        robotmodel
         kinematic
+        yamlloader
         
         
 )

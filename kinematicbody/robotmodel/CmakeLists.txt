@@ -1,0 +1,8 @@
+add_library(robotmodel STATIC src/robotmodel.cpp)
+find_package(Eigen3 REQUIRED)
+
+target_include_directories(robotmodel PUBLIC 
+${CMAKE_CURRENT_SOURCE_DIR}/inc
+ )
+
+target_link_libraries(robotmodel PUBLIC Eigen3::Eigen)

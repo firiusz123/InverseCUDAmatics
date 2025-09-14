@@ -1,24 +1,24 @@
+#pragma once
 #include <iostream>
 #include <vector>
-#include <string>
-#include <yaml-cpp/yaml.h>
-#include "link.h"
+#include "robotmodel.h"
 #include <Eigen/Dense>
 
 class KinematicBody
 {
     private:
-    std::string configPath;
-    YAML::Node config ;
-    YAML::Node model ;
+    RobotModel& model;
 /********************************************************* */
     //array of links
-    std::vector<Link> allParam;
-    std::vector<float> jointVarList ;
 
     public:
-    KinematicBody(const std::string path);
+    KinematicBody(RobotModel& model );
     Eigen::Vector4d forwardKinematic();
+    int dof() const;
+    void setJointAngles(const std::vector<float>& q);
+    bool inverseKinematic(const Eigen::Vector3d& target , int iter_limit , double tolerance , double alpha);
+    Eigen::MatrixXd computeJacobian(double eps);
+    
     
     
 };

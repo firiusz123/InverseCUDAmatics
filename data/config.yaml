@@ -20,7 +20,7 @@ model:
       a:
         value: 1.0
         variable: false
-      alpha:
+      alfa:
         value: 0.0
         variable: false
 
@@ -34,7 +34,7 @@ model:
       a:
         value: 0.6
         variable: false
-      alpha:
+      alfa:
         value: 0.0
         variable: false
 
@@ -48,6 +48,6 @@ model:
       a:
         value: 0.2
         variable: false
-      alpha:
+      alfa:
         value: 0.0
         variable: false
