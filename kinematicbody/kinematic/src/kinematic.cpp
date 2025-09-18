@@ -25,7 +25,7 @@ bool KinematicBody::inverseKinematic(const Eigen::Vector3d& target , float e , i
     Eigen::Vector3d p_delta = target - p0 ;
     std::cout << p_delta <<'\n';
 
-    Eigen::MatrixXd J = model.computeNumericalJacobian();
+    Eigen::MatrixXd J = model.computeGeometricalJacobian();
     Eigen::MatrixXd J_pinv = J.completeOrthogonalDecomposition().pseudoInverse();
 
     Eigen::VectorXd dq = J_pinv * p_delta;

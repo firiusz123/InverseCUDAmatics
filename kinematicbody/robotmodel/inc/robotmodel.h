@@ -17,11 +17,13 @@ class RobotModel
     std::vector<Eigen::Vector4d> linkCoordinates;
 
     Eigen::Matrix4d dhTransform = Eigen::Matrix4d::Identity();
+    std::vector<Eigen::Matrix4d> dhCumulative;
     Eigen::Vector4d EndLinkCord;
     /**************************************************/
     bool collectVariables();
     const Eigen::Matrix4d& getDHTransform();
     Eigen::MatrixXd computeNumericalJacobian(float delta = 1e-6);
+    Eigen::MatrixXd computeGeometricalJacobian();
     void variableSetter(const std::vector<float> newValues);
 
     

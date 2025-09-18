@@ -23,8 +23,10 @@ const Eigen::Matrix4d& RobotModel::getDHTransform()
     Eigen::Vector4d origin(0, 0, 0, 1);
 
     size_t size = id.size();
+    dhCumulative.clear();
     linkCoordinates.clear();
     linkCoordinates.reserve(size);
+    dhCumulative.reserve(size);
 
     for(size_t i = 0 ; i < size; i++)
     {
@@ -42,6 +44,7 @@ const Eigen::Matrix4d& RobotModel::getDHTransform()
         dhTransform *= m1;
         EndLinkCord = dhTransform * origin;
         linkCoordinates.push_back(EndLinkCord);
+        dhCumulative.push_back(dhTransform);
     }
 
     return dhTransform;
@@ -79,6 +82,29 @@ Eigen::MatrixXd RobotModel::computeNumericalJacobian(float delta)
         getDHTransform();
     }
 
+    return J;
+}
+Eigen::MatrixXd RobotModel::computeGeometricalJacobian()
+{
+    size_t size = id.size();
+    //jacobian just for the 3 dimensions for now no need for ortientation
+    Eigen::MatrixXd J(3,size);
+    
+    Eigen::Vector3d p0 = {0,0,0};
+    Eigen::Vector3d z_i ;
+    
+    size_t col = 0;
+    for(int i = 0 ; i < size ; i++)
+    {
+        Eigen::Vector3d p1 = linkCoordinates[i].head<3>();
+        z_i = dhCumulative[i].block<3,1>(0,2);
+
+
+        if(var_theta[i] || var_alfa[i]){J.col(col++) =z_i.cross(p1 - p0);}
+        if(var_a[i] || var_d[i]){J.col(col++) = z_i;}
+
+        p0 = p1;
+    }
     return J;
 }
 
