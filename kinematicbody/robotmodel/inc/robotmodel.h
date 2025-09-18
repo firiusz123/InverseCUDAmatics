@@ -14,13 +14,16 @@ class RobotModel
 
     std::vector<float*> variable_ptrs;
 
-    std::vector<float> linkCoordinates;
+    std::vector<Eigen::Vector4d> linkCoordinates;
 
     Eigen::Matrix4d dhTransform = Eigen::Matrix4d::Identity();
     Eigen::Vector4d EndLinkCord;
     /**************************************************/
     bool collectVariables();
     const Eigen::Matrix4d& getDHTransform();
+    Eigen::MatrixXd computeNumericalJacobian(float delta = 1e-6);
+    void variableSetter(const std::vector<float> newValues);
+
     
     int dof() const { return variable_ptrs.size(); }
 };

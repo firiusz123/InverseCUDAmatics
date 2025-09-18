@@ -46,6 +46,7 @@ bool YamlLoader::LoadModel(RobotModel& model)
                 // α
                 parseParam(yamlLink["alfa"] , model.alfa ,model.var_alfa);
             }
+            
             model.collectVariables();
             std::cout << "Loaded robot with " << model.id.size() << " links\n";
             return true;

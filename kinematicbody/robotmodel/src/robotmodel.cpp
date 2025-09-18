@@ -20,8 +20,13 @@ const Eigen::Matrix4d& RobotModel::getDHTransform()
 {
     
     dhTransform = Eigen::Matrix4d::Identity();
+    Eigen::Vector4d origin(0, 0, 0, 1);
 
-    for(size_t i = 0 ; i < id.size(); i++)
+    size_t size = id.size();
+    linkCoordinates.clear();
+    linkCoordinates.reserve(size);
+
+    for(size_t i = 0 ; i < size; i++)
     {
         Eigen::Matrix4d m1;
         float cosTheta = std::cos(theta[i]);
@@ -35,7 +40,45 @@ const Eigen::Matrix4d& RobotModel::getDHTransform()
         , 0.0 , 0.0 , 0.0 , 1.0;
 
         dhTransform *= m1;
+        EndLinkCord = dhTransform * origin;
+        linkCoordinates.push_back(EndLinkCord);
     }
-    EndLinkCord = dhTransform * Eigen::Vector4d(0, 0, 0, 1);
+
     return dhTransform;
 }
+
+void RobotModel::variableSetter(const std::vector<float> newValues)
+{
+    size_t n =variable_ptrs.size();
+    if(newValues.size() != n){throw std::runtime_error("Mismatch in number of variable parameters");}
+    for(size_t i = 0 ; i < n ; i++)
+    {
+        *variable_ptrs[i] = newValues[i];
+    }
+}
+
+Eigen::MatrixXd RobotModel::computeNumericalJacobian(float delta)
+{
+    int size = variable_ptrs.size();
+    //jacobian just for the 3 dimensions for now no need for ortientation
+    Eigen::MatrixXd J(3,size);
+    Eigen::Vector3d p0 = EndLinkCord.head<3>();
+
+    for(int i = 0 ; i < size ; i++)
+    {   
+        float original = *variable_ptrs[i];
+
+        *variable_ptrs[i] = original + delta;
+
+        getDHTransform();
+
+        Eigen::Vector3d p1 = EndLinkCord.head<3>();
+        J.col(i) = (p1 - p0) / delta ;
+
+        *variable_ptrs[i] = original;
+        getDHTransform();
+    }
+
+    return J;
+}
+

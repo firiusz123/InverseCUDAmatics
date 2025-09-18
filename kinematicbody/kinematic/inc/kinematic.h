@@ -8,16 +8,16 @@ class KinematicBody
 {
     private:
     RobotModel& model;
+    Eigen::Vector3d targetParams;
 /********************************************************* */
     //array of links
 
     public:
     KinematicBody(RobotModel& model );
     Eigen::Vector4d forwardKinematic();
-    int dof() const;
-    void setJointAngles(const std::vector<float>& q);
-    bool inverseKinematic(const Eigen::Vector3d& target , int iter_limit , double tolerance , double alpha);
-    Eigen::MatrixXd computeJacobian(double eps);
+    bool inverseKinematic(const Eigen::Vector3d& target , float e = 1e-2 , int iter_limit = 100 , float alpha = 1e-1 );
+
+    
     
     
     

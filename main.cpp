@@ -4,8 +4,11 @@
 #include <iostream>
 #include <vector>
 
+
 int main()
 {
+    std::vector<float> newParams = {M_PI/2 , 0.0 , 0.0};
+    
     // 1. Load robot model from YAML
     std::string filepath = "../data/config.yaml";
     RobotModel robot;
@@ -17,12 +20,17 @@ int main()
         return -1;
     }
 
-    // 2. Create KinematicBody
     KinematicBody model1(robot);
-
-    // 3. Compute initial FK
     Eigen::Vector4d endEffector = model1.forwardKinematic();
-    std::cout << "Initial pose:\n" << endEffector.transpose() << "\n";
 
+    std::cout << "Initial pose:\n" << endEffector.transpose() << "\n";
+    //robot.variableSetter(newParams);
+    endEffector = model1.forwardKinematic();
+    Eigen::MatrixXd J = robot.computeNumericalJacobian();
+    std::cout << "final pose:\n" << endEffector.transpose() << "\n";
+    std::cout << "jacobian :\n" << J << "\n";
+
+    Eigen::Vector3d t = {0 , 1.8 , 0};
+    model1.inverseKinematic(t);
     return 0;
 }
